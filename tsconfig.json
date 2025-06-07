@@ -17,7 +17,8 @@
     "baseUrl": "src",
     "paths": {
       "@layout/*": ["app/layout/*"],
-      "@views/*": ["app/views/*"]
+      "@views/*": ["app/views/*"],
+      "@/*": ["app/*"],
 }
   },
   "angularCompilerOptions": {

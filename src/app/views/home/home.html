@@ -1,1 +1,30 @@
-<p>home works!</p>
+<h1 class="home-title">SIGNALS</h1>
+<div class="home-signals-values">
+  <div>{{value()}}</div>
+  <button (click)="increment()">+1</button>
+  <div>{{doubleCount()}}</div>
+  <div>{{linkedUsuario().id}}</div>
+  <div>{{linkedUsuarioPrev().id}}</div>
+</div>
+<div class="home-singals-column">
+  <div>
+    @for(usuario of usuarios(); track usuario.id) {
+      <div>
+        <div>
+          {{usuario.name}}
+        </div>
+        <div>
+          {{usuario.age}}
+        </div>
+      </div>
+    }
+  </div>
+</div>
+<div class="home-botones">
+  <button (click)="addUserAtras()">Agregar usuario Atras</button>
+  <button (click)="addUserDelante()">Agregar usuario Delante</button>
+  <button (click)="deleteIndex(value())">Delete index Y</button>
+</div>
+<ng-content>ACA VA EL CONTENIDO DENTRO DE LAS ETIQUETAS DE ESTE COMPONENTE</ng-content>
+<h1 class="home-title">INPUT & OUTPUT</h1>
+<app-input-show [inputValue]="value()" (outputEmit)="recibirMensaje($event)" />
