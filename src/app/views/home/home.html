@@ -28,3 +28,23 @@
 <ng-content>ACA VA EL CONTENIDO DENTRO DE LAS ETIQUETAS DE ESTE COMPONENTE</ng-content>
 <h1 class="home-title">INPUT & OUTPUT</h1>
 <app-input-show [inputValue]="value()" (outputEmit)="recibirMensaje($event)" />
+<h1 class="home-title">TAGS CLASS STYLES</h1>
+@for(link of links(); track link.label) {
+  <button (click)="activeLink.set(link.label)" [class.active]="activeLink() === link.label">
+    {{link.label}}
+  </button>
+}
+<h1 class="home-title">TWO-WAY-BINDING</h1>
+<h2>Hello {{ firstName }}!</h2>
+<input type="text" [(ngModel)]="firstName" />
+<h1 class="home-title">DEFER LOADING</h1>
+@defer(on hover) {
+  <div>defer on hover active</div>
+} @placeholder {
+  <div>defer on hover not active</div>
+}
+@defer(on interaction) {
+  <div>defer on interaction active</div>
+} @placeholder {
+  <div>defer on interaction not active</div>
+}

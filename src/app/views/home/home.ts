@@ -1,5 +1,7 @@
-import { Component, linkedSignal, computed, signal, ChangeDetectionStrategy, effect } from '@angular/core';
+import { Component, linkedSignal, computed, signal, ChangeDetectionStrategy, effect, inject } from '@angular/core';
 import { InputShow } from "@/components";
+import { FormsModule } from '@angular/forms';
+import { Logger } from "@/services"
 
 interface User {
   id: number,
@@ -15,6 +17,14 @@ const users = [
   {id: 5, name: "pablo", age: 55},
 ]
 
+const links = [
+  {label: "link1"},
+  {label: "link2"},
+  {label: "link3"},
+  {label: "link4"},
+  {label: "link5"}
+]
+
 // STANDALONE vs NGModule
 // Antes con NGModule la mejor practica era crear un modulo del componente para importar y exportar, y usarlo
 // donde necesites usar ese componente.
@@ -24,7 +34,8 @@ const users = [
 @Component({
   selector: 'app-home',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [InputShow],
+  imports: [InputShow, FormsModule],
+  providers: [Logger],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
@@ -41,6 +52,10 @@ export class Home {
       );
     }
   })
+  links = signal(links);
+  activeLink = signal("");
+  firstName = "";
+  logger = inject(Logger);
 
   constructor() {
     effect(() => {
@@ -69,6 +84,7 @@ export class Home {
   deleteIndex(index: number) {
     const userDelete = this.usuarios()[index];
     this.usuarios.update(usuarios => usuarios.filter(user => user != userDelete))
+    this.logger.log(`user deleted ${userDelete.name}`)
   }
 
   recibirMensaje(texto: string) {
